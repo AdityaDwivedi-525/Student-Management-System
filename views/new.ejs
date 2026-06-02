@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Student</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #f4f6f9;
+        }
+
+        .form-card {
+            max-width: 850px;
+            margin: auto;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .card {
+            border: none;
+        }
+
+        .card-header {
+            padding: 20px;
+        }
+
+        .card-header h2 {
+            margin: 0;
+            font-weight: 700;
+        }
+
+        .form-label {
+            font-weight: 600;
+        }
+
+        .btn {
+            min-width: 120px;
+        }
+
+        @media (max-width: 768px) {
+
+            .container {
+                padding: 15px;
+            }
+
+            .card-header h2 {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container py-5">
+
+    <div class="card shadow form-card">
+
+        <div class="card-header bg-success text-white text-center">
+            <h2>Add New Student</h2>
+        </div>
+
+        <div class="card-body p-4">
+
+            <form
+                action="/students"
+                method="POST"
+                class="needs-validation"
+                novalidate
+            >
+
+                <!-- Name -->
+                <div class="mb-3">
+                    <label class="form-label">Student Name</label>
+                    <input
+                        type="text"
+                        name="student[name]"
+                        class="form-control"
+                        required
+                    >
+
+                    <div class="invalid-feedback">
+                        Please enter student name.
+                    </div>
+                </div>
+
+                <!-- Email -->
+                <div class="mb-3">
+                    <label class="form-label">Email</label>
+
+                    <input
+                        type="email"
+                        name="student[email]"
+                        class="form-control"
+                        required
+                    >
+
+                    <div class="invalid-feedback">
+                        Please enter a valid email.
+                    </div>
+                </div>
+
+                <!-- Age + Semester -->
+                <div class="row">
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Age</label>
+
+                        <input
+                            type="number"
+                            name="student[age]"
+                            class="form-control"
+                            min="1"
+                            required
+                        >
+
+                        <div class="invalid-feedback">
+                            Age must be greater than 0.
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Semester</label>
+
+                        <input
+                            type="number"
+                            name="student[semester]"
+                            class="form-control"
+                            min="1"
+                            required
+                        >
+
+                        <div class="invalid-feedback">
+                            Semester must be at least 1.
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Gender -->
+                <div class="mb-3">
+                    <label class="form-label">Gender</label>
+
+                    <select
+                        name="student[gender]"
+                        class="form-select"
+                        required
+                    >
+                        <option value="">Select Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+
+                    <div class="invalid-feedback">
+                        Please select gender.
+                    </div>
+                </div>
+
+                <!-- Course -->
+                <div class="mb-3">
+                    <label class="form-label">Course</label>
+
+                    <input
+                        type="text"
+                        name="student[course]"
+                        class="form-control"
+                        required
+                    >
+
+                    <div class="invalid-feedback">
+                        Please enter course.
+                    </div>
+                </div>
+
+                <!-- Address -->
+                <div class="mb-3">
+                    <label class="form-label">Address</label>
+
+                    <textarea
+                        name="student[address]"
+                        class="form-control"
+                        rows="3"
+                        required
+                    ></textarea>
+
+                    <div class="invalid-feedback">
+                        Please enter address.
+                    </div>
+                </div>
+
+                <!-- Phone -->
+                <div class="mb-4">
+                    <label class="form-label">Phone Number</label>
+
+                    <input
+                        type="tel"
+                        name="student[phone]"
+                        class="form-control"
+                        pattern="[0-9]{10}"
+                        maxlength="10"
+                        required
+                    >
+
+                    <div class="invalid-feedback">
+                        Enter a valid 10-digit phone number.
+                    </div>
+                </div>
+
+                <!-- Buttons -->
+                <div class="row">
+
+                    <div class="col-md-6 mb-2">
+                        <a
+                            href="/students"
+                            class="btn btn-secondary w-100"
+                        >
+                            Back
+                        </a>
+                    </div>
+
+                    <div class="col-md-6 mb-2">
+                        <button
+                            type="submit"
+                            class="btn btn-success w-100"
+                        >
+                            Add Student
+                        </button>
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+(() => {
+    'use strict';
+
+    const forms = document.querySelectorAll('.needs-validation');
+
+    Array.from(forms).forEach(form => {
+        form.addEventListener('submit', event => {
+
+            if (!form.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+
+            form.classList.add('was-validated');
+
+        }, false);
+    });
+})();
+</script>
+
+</body>
+</html>

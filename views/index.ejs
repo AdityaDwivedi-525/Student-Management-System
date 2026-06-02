@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Management System</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #f4f6f9;
+        }
+
+        .page-title {
+            font-weight: 700;
+            color: #0d6efd;
+        }
+
+        .card {
+            border: none;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .student-name {
+            color: #0d6efd;
+            font-weight: bold;
+        }
+
+        .card-footer {
+            background: transparent;
+            border-top: none;
+        }
+
+        .student-info {
+            margin-bottom: 8px;
+        }
+
+        .badge-course {
+            font-size: 0.9rem;
+        }
+
+        .action-btns {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .delete-form {
+            margin: 0;
+        }
+
+        @media (max-width: 576px) {
+            .page-title {
+                font-size: 1.8rem;
+            }
+
+            .action-btns .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container py-5">
+
+        <h1 class="text-center page-title mb-4">
+            Student Management System
+        </h1>
+
+        <div class="text-center mb-4">
+            <a href="/students/new" class="btn btn-primary">
+                + New Student
+            </a>
+        </div>
+
+        <% if(students.length > 0){ %>
+
+            <div class="row g-4">
+
+                <% students.forEach(student => { %>
+
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+
+                        <div class="card shadow h-100">
+
+                            <div class="card-body">
+
+                                <h3 class="student-name mb-3">
+                                    <%= student.name %>
+                                </h3>
+
+                                <span class="badge bg-primary badge-course mb-3">
+                                    <%= student.course %>
+                                </span>
+
+                                <hr>
+
+                                <p class="student-info">
+                                    <strong>Email:</strong>
+                                    <%= student.email %>
+                                </p>
+
+                                <p class="student-info">
+                                    <strong>Age:</strong>
+                                    <%= student.age %>
+                                </p>
+
+                                <p class="student-info">
+                                    <strong>Gender:</strong>
+                                    <%= student.gender %>
+                                </p>
+
+                                <p class="student-info">
+                                    <strong>Semester:</strong>
+                                    <%= student.semester %>
+                                </p>
+
+                                <p class="student-info">
+                                    <strong>Address:</strong>
+                                    <%= student.address %>
+                                </p>
+
+                                <p class="student-info">
+                                    <strong>Phone:</strong>
+                                    <%= student.phone %>
+                                </p>
+
+                            </div>
+
+                            <div class="card-footer">
+
+                                <div class="action-btns">
+
+                                    <a href="/students/<%= student._id %>/edit"
+                                       class="btn btn-warning btn-sm">
+                                        Edit
+                                    </a>
+
+                                    <form
+                                        action="/students/<%= student._id %>?_method=DELETE"
+                                        method="POST"
+                                        class="delete-form"
+                                    >
+                                        <button
+                                            type="submit"
+                                            class="btn btn-danger btn-sm"
+                                            onclick="return confirm('Delete this student?')"
+                                        >
+                                            Delete
+                                        </button>
+                                    </form>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                <% }) %>
+
+            </div>
+
+        <% } else { %>
+
+            <div class="alert alert-warning text-center">
+                No Students Found
+            </div>
+
+        <% } %>
+
+    </div>
+
+</body>
+</html>
